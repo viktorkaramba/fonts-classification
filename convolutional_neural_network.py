@@ -1,15 +1,12 @@
 import os
-import numpy as np
-from PIL import Image
+
 import pandas as pd
-import tensorflow as tf
+from tensorflow.python.keras.layers import MaxPooling2D
 from keras.utils import to_categorical
-from keras.layers import MaxPooling2D
-from numba import jit
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
-from tensorflow.python.keras import backend
 from tensorflow.python.keras import Sequential
+from tensorflow.python.keras import backend
 from tensorflow.python.keras.layers import Dense, Dropout, Conv2D, Flatten
 
 folder_path = 'fonts'
@@ -64,3 +61,4 @@ model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accur
 model.fit(train_data, train_labels, epochs=20, batch_size=512, validation_split=0.2)
 loss, accuracy = model.evaluate(test_data, test_labels)
 print(f'Test Loss: {loss}, Test Accuracy: {accuracy}')
+model.save('fonts_classification_cnn_model.h5')
